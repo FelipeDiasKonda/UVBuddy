@@ -26,8 +26,8 @@ class UVRepository {
     }
 
     suspend fun fetchLatestUV(): Float? {
-        val channelId = "EXAMPLE_CHANNEL_ID"
-        val apiKey = "EXAMPLE_API_KEY"
+        val channelId = "2876817"
+        val apiKey = "JGSCB36IGZ5QLOJV"
         val response = service.getLatestFeed(channelId, apiKey)
         val uvString = response.feeds.firstOrNull()?.uvIndex
         return uvString?.toFloatOrNull()

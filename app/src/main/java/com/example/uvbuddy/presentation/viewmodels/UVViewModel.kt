@@ -21,6 +21,7 @@ class UVViewModel : ViewModel() {
                 uv == null        -> "Erro ao obter UV"
                 uv >= 8.0f        -> "UV Muito Alto"
                 uv >= 5.0f        -> "UV Alto"
+                uv >= 2.0f        -> "UV Baixo"
                 else              -> "UV Moderado"
             }
         }
