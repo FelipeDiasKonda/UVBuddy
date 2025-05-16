@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/boxLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="12dp">
@@ -11,5 +12,14 @@
         android:text="@string/loading_uv"
         android:textSize="18sp"
         android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/tvTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dica UV aqui"
+        android:textSize="12sp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="8dp" />
 
 </androidx.wear.widget.BoxInsetLayout>

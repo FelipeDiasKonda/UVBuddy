@@ -28,6 +28,14 @@ class MainActivity : AppCompatActivity() {
             binding.tvUvStatus.text = status
         }
 
+        viewModel.backgroundColor.observe(this) { color ->
+            binding.boxLayout.setBackgroundColor(color)
+        }
+
+        viewModel.tip.observe(this) { tip ->
+            binding.tvTip.text = tip
+        }
+
         // Chama requisição
         viewModel.fetchUVLevel()
     }
