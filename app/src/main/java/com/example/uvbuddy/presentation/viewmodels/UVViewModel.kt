@@ -3,6 +3,7 @@ package com.example.uvbuddy.presentation.viewmodels
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -36,29 +37,37 @@ class UVViewModel : ViewModel() {
 
     private fun fetchUVLevel() {
         viewModelScope.launch {
-            val uv = repo.fetchLatestUV()
-            val (status, color) = when {
-                uv == null -> "Erro ao obter UV" to android.graphics.Color.GRAY
-                uv >= 8.0f -> "Índice UV $uv\n   Muito Alto" to android.graphics.Color.RED
-                uv >= 5.0f -> "Índice UV $uv\n        Alto" to android.graphics.Color.rgb(255, 165, 0) // Laranja
-                uv >= 2.0f -> "Índice UV $uv\n   Moderado" to android.graphics.Color.YELLOW
-                uv >  0.0f -> "Índice UV $uv\n       Baixo" to android.graphics.Color.GREEN
-                else -> "Sem radiação UV" to android.graphics.Color.GRAY
-            }
-            _uvStatus.value = status
-            _backgroundColor.value = color
+            try {
+                val uv = repo.fetchLatestUV()
+                val (status, color) = when {
+                    uv == null -> "Erro ao obter UV" to Color.GRAY
+                    uv >= 8.0f -> "Índice UV $uv\n   Muito Alto" to Color.RED
+                    uv >= 5.0f -> "Índice UV $uv\n        Alto" to Color.rgb(255, 165, 0) // Laranja
+                    uv >= 2.0f -> "Índice UV $uv\n   Moderado" to Color.YELLOW
+                    uv >  0.0f -> "Índice UV $uv\n       Baixo" to Color.GREEN
+                    else -> "Sem radiação UV" to Color.GRAY
+                }
 
-            if (uv != null && uv >= 5.0f) {
-                _alertUv.value = status
-            }
+                _uvStatus.value = status
+                _backgroundColor.value = color
 
-             _tip.value = when {
-                uv == null -> null
-                uv >= 8.0f -> "Proteção máxima"
-                uv >= 5.0f -> "Use protetor solar"
-                uv >= 2.0f -> "Use óculos e boné"
-                uv >  0.0f -> "Não se preocupe"
-                else -> null
+                if (uv != null && uv >= 5.0f) {
+                    _alertUv.value = status
+                }
+
+                _tip.value = when {
+                    uv == null -> "Sem dados"
+                    uv >= 8.0f -> "Proteção máxima"
+                    uv >= 5.0f -> "Use protetor solar"
+                    uv >= 2.0f -> "Use óculos e boné"
+                    uv >  0.0f -> "Não se preocupe"
+                    else -> "Sem dica"
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _uvStatus.value = "Erro de conexão"
+                _backgroundColor.value = Color.GRAY
+                _tip.value = "Verifique sua conexão"
             }
         }
     }
