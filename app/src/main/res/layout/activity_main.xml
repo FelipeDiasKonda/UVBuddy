@@ -3,32 +3,43 @@
     android:id="@+id/boxLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="12dp">
+    android:background="@android:color/black">
 
-    <ImageView
-        android:id="@+id/appIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:contentDescription="@string/icon"
-        android:src="@drawable/ic_app"
-        android:layout_gravity="top|center_horizontal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/tvUvStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/loading_uv"
-        android:textSize="18sp"
-        android:textColor="@color/common_google_signin_btn_text_light"
-        android:layout_gravity="center" />
+        <ImageView
+            android:id="@+id/appIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="@string/icon"
+            android:src="@drawable/ic_app" />
 
-    <TextView
-        android:id="@+id/tvTip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dica UV aqui"
-        android:textSize="12sp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="8dp" />
+        <TextView
+            android:id="@+id/tvUvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loading_uv"
+            android:textColor="@android:color/primary_text_light"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dica UV aqui"
+            android:textColor="@android:color/primary_text_light"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
 
 </androidx.wear.widget.BoxInsetLayout>
